@@ -1,5 +1,9 @@
-+++
-date = '{{ .Date }}'
-draft = true
-title = '{{ replace .File.ContentBaseName "-" " " | title }}'
-+++
+---
+title: Title of the post
+description:
+date: '{{ .Date }}'
+tldr: (optional)
+draft: true/false (optional)
+tags: [tag names] (optional)
+toc: true/false (optional)
+---

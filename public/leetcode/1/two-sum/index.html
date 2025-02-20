@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html><head lang="en"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>1. Two Sum - Leetcode-Solutions</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Solution
+第一個迴圈先把每個數字以 number 當作 key、index 當作 value 加到一個 Map 裡面，第二個迴圈再直接用 target - 現在的數字當作 key 去找 Map 裡面有沒有這個 key value pair。
+有找到值就回傳結果，-1 代表還沒找到，就繼續找到有為止。
+Implementation
+class Solution {
+    fun twoSum(nums: IntArray, target: Int): IntArray {
+        val map = mutableMapOf&lt;Int, Int&gt;()
+
+        for (i in 0 until nums.size) {
+            map[nums[i]] = i
+        }
+
+        var result = intArrayOf()
+
+        for (i in 0 until nums.size) {
+            val find = target - nums[i]
+            val index = map[find] ?: -1
+
+            if (index == i) continue
+            if (index != -1) {
+                result = intArrayOf(i, index)
+                break
+            }
+        }
+
+        return result
+    }
+}
+" />
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content="http://localhost:1313/leetcode/1/two-sum/">
+  <meta property="og:site_name" content="Leetcode-Solutions">
+  <meta property="og:title" content="1. Two Sum">
+  <meta property="og:description" content="Solution 第一個迴圈先把每個數字以 number 當作 key、index 當作 value 加到一個 Map 裡面，第二個迴圈再直接用 target - 現在的數字當作 key 去找 Map 裡面有沒有這個 key value pair。 有找到值就回傳結果，-1 代表還沒找到，就繼續找到有為止。
+Implementation class Solution { fun twoSum(nums: IntArray, target: Int): IntArray { val map = mutableMapOf&lt;Int, Int&gt;() for (i in 0 until nums.size) { map[nums[i]] = i } var result = intArrayOf() for (i in 0 until nums.size) { val find = target - nums[i] val index = map[find] ?: -1 if (index == i) continue if (index != -1) { result = intArrayOf(i, index) break } } return result } }">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-10-11T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-10-11T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Hash Table">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="1. Two Sum">
+  <meta name="twitter:description" content="Solution 第一個迴圈先把每個數字以 number 當作 key、index 當作 value 加到一個 Map 裡面，第二個迴圈再直接用 target - 現在的數字當作 key 去找 Map 裡面有沒有這個 key value pair。 有找到值就回傳結果，-1 代表還沒找到，就繼續找到有為止。
+Implementation class Solution { fun twoSum(nums: IntArray, target: Int): IntArray { val map = mutableMapOf&lt;Int, Int&gt;() for (i in 0 until nums.size) { map[nums[i]] = i } var result = intArrayOf() for (i in 0 until nums.size) { val find = target - nums[i] val index = map[find] ?: -1 if (index == i) continue if (index != -1) { result = intArrayOf(i, index) break } } return result } }">
+
+        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://localhost:1313/">Leetcode-Solutions</a>
+	</div>
+	<nav>
+		
+		
+	</nav>
+</header>
+
+<main>
+  <article>
+    <div class="post-container">
+      
+      <div class="post-content">
+        <div class="title">
+          <h1 class="title">1. Two Sum</h1>
+          <div class="meta">Posted on Oct 11, 2024</div>
+        </div>
+        
+        <section class="body">
+          <h2 id="solution">Solution</h2>
+<p>第一個迴圈先把每個數字以 number 當作 key、index 當作 value 加到一個 Map 裡面，第二個迴圈再直接用 target - 現在的數字當作 key 去找 Map 裡面有沒有這個 key value pair。
+有找到值就回傳結果，-1 代表還沒找到，就繼續找到有為止。</p>
+<h3 id="implementation">Implementation</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">twoSum</span>(nums: IntArray, target: Int): IntArray {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> map = mutableMapOf&lt;Int, Int&gt;()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">0</span> until nums.size) {
+</span></span><span style="display:flex;"><span>            map[nums[i]] = i
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> result = intArrayOf()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">0</span> until nums.size) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">val</span> find = target - nums[i]
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">val</span> index = map[find] <span style="color:#f92672">?:</span> -<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">==</span> i) <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">!=</span> -<span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>                result = intArrayOf(i, index)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+        </section>
+        <div class="post-tags">
+          
+          
+          <nav class="nav tags">
+            <ul class="tags">
+              
+              <li><a href="/tags/array">Array</a></li>
+              
+              <li><a href="/tags/hash-table">Hash Table</a></li>
+              
+            </ul>
+          </nav>
+          
+          
+        </div>
+      </div>
+
+      
+      
+    </div>
+
+    </article>
+</main>
+<footer>
+  <div style="display:flex"></div>
+  <div class="footer-info">
+    2025  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+</div>
+    </body>
+</html>
