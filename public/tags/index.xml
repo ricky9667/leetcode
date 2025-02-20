@@ -6,20 +6,216 @@
     <description>Recent content in Tags on Leetcode-Solutions</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Oct 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 20 Feb 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Array</title>
-      <link>http://localhost:1313/tags/array/</link>
-      <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/array/</guid>
+      <title>Breadth-First Search</title>
+      <link>http://localhost:1313/tags/breadth-first-search/</link>
+      <pubDate>Thu, 20 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/breadth-first-search/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Depth-First Search</title>
+      <link>http://localhost:1313/tags/depth-first-search/</link>
+      <pubDate>Thu, 20 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/depth-first-search/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Graph</title>
+      <link>http://localhost:1313/tags/graph/</link>
+      <pubDate>Thu, 20 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/graph/</guid>
       <description></description>
     </item>
     <item>
       <title>Hash Table</title>
       <link>http://localhost:1313/tags/hash-table/</link>
-      <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 20 Feb 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/hash-table/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Array</title>
+      <link>http://localhost:1313/tags/array/</link>
+      <pubDate>Mon, 17 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/array/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Matrix</title>
+      <link>http://localhost:1313/tags/matrix/</link>
+      <pubDate>Mon, 17 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/matrix/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Union Find</title>
+      <link>http://localhost:1313/tags/union-find/</link>
+      <pubDate>Mon, 17 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/union-find/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Binary Search Tree</title>
+      <link>http://localhost:1313/tags/binary-search-tree/</link>
+      <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/binary-search-tree/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Binary Tree</title>
+      <link>http://localhost:1313/tags/binary-tree/</link>
+      <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/binary-tree/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Design</title>
+      <link>http://localhost:1313/tags/design/</link>
+      <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/design/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Iterator</title>
+      <link>http://localhost:1313/tags/iterator/</link>
+      <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/iterator/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Stack</title>
+      <link>http://localhost:1313/tags/stack/</link>
+      <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/stack/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tree</title>
+      <link>http://localhost:1313/tags/tree/</link>
+      <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/tree/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Dynamic Programming</title>
+      <link>http://localhost:1313/tags/dynamic-programming/</link>
+      <pubDate>Wed, 15 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/dynamic-programming/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Linked List</title>
+      <link>http://localhost:1313/tags/linked-list/</link>
+      <pubDate>Wed, 15 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/linked-list/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Divide and Conquer</title>
+      <link>http://localhost:1313/tags/divide-and-conquer/</link>
+      <pubDate>Wed, 01 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/divide-and-conquer/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Doubly-Linked List</title>
+      <link>http://localhost:1313/tags/doubly-linked-list/</link>
+      <pubDate>Sat, 28 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/doubly-linked-list/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Two Pointers</title>
+      <link>http://localhost:1313/tags/two-pointers/</link>
+      <pubDate>Tue, 17 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/two-pointers/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>String</title>
+      <link>http://localhost:1313/tags/string/</link>
+      <pubDate>Wed, 11 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/string/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sorting</title>
+      <link>http://localhost:1313/tags/sorting/</link>
+      <pubDate>Tue, 03 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/sorting/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Simulation</title>
+      <link>http://localhost:1313/tags/simulation/</link>
+      <pubDate>Tue, 26 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/simulation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Math</title>
+      <link>http://localhost:1313/tags/math/</link>
+      <pubDate>Fri, 22 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/math/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sliding Window</title>
+      <link>http://localhost:1313/tags/sliding-window/</link>
+      <pubDate>Thu, 14 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/sliding-window/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Counting</title>
+      <link>http://localhost:1313/tags/counting/</link>
+      <pubDate>Sun, 10 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/counting/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Binary Search</title>
+      <link>http://localhost:1313/tags/binary-search/</link>
+      <pubDate>Tue, 29 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/binary-search/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Prefix Sum</title>
+      <link>http://localhost:1313/tags/prefix-sum/</link>
+      <pubDate>Tue, 29 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/prefix-sum/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Greedy</title>
+      <link>http://localhost:1313/tags/greedy/</link>
+      <pubDate>Tue, 22 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/greedy/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Recursion</title>
+      <link>http://localhost:1313/tags/recursion/</link>
+      <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/recursion/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>String Matching</title>
+      <link>http://localhost:1313/tags/string-matching/</link>
+      <pubDate>Thu, 10 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/string-matching/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Trie</title>
+      <link>http://localhost:1313/tags/trie/</link>
+      <pubDate>Wed, 02 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/trie/</guid>
       <description></description>
     </item>
   </channel>

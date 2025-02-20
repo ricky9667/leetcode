@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html><head lang="en"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>88. Merge Sorted Array - Leetcode-Solutions</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Solution
+Implementation
+class Solution {
+    fun merge(nums1: IntArray, m: Int, nums2: IntArray, n: Int): Unit {
+        var pm = 0
+        var pn = 0
+
+        val size = m &#43; n
+        val result = nums1.copyOf()
+
+        while (pm &#43; pn &lt; size) {
+            if (pn &gt;= n) {
+                result[pm &#43; pn] = nums1[pm&#43;&#43;]
+                continue
+            }
+
+            if (pm &gt;= m) {
+                result[pm &#43; pn] = nums2[pn&#43;&#43;]
+                continue
+            }
+            
+            if (nums1[pm] &gt; nums2[pn]) {
+                result[pm &#43; pn] = nums2[pn&#43;&#43;]
+            } else {
+                result[pm &#43; pn] = nums1[pm&#43;&#43;]
+            }
+        }
+
+        for (i in 0 until size) {
+            nums1.set(i, result[i])
+        }
+    }
+}
+" />
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content="http://localhost:1313/posts/88/">
+  <meta property="og:site_name" content="Leetcode-Solutions">
+  <meta property="og:title" content="88. Merge Sorted Array">
+  <meta property="og:description" content="Solution Implementation class Solution { fun merge(nums1: IntArray, m: Int, nums2: IntArray, n: Int): Unit { var pm = 0 var pn = 0 val size = m &#43; n val result = nums1.copyOf() while (pm &#43; pn &lt; size) { if (pn &gt;= n) { result[pm &#43; pn] = nums1[pm&#43;&#43;] continue } if (pm &gt;= m) { result[pm &#43; pn] = nums2[pn&#43;&#43;] continue } if (nums1[pm] &gt; nums2[pn]) { result[pm &#43; pn] = nums2[pn&#43;&#43;] } else { result[pm &#43; pn] = nums1[pm&#43;&#43;] } } for (i in 0 until size) { nums1.set(i, result[i]) } } }">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-07-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-07-26T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Two Pointers">
+    <meta property="article:tag" content="Sorting">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="88. Merge Sorted Array">
+  <meta name="twitter:description" content="Solution Implementation class Solution { fun merge(nums1: IntArray, m: Int, nums2: IntArray, n: Int): Unit { var pm = 0 var pn = 0 val size = m &#43; n val result = nums1.copyOf() while (pm &#43; pn &lt; size) { if (pn &gt;= n) { result[pm &#43; pn] = nums1[pm&#43;&#43;] continue } if (pm &gt;= m) { result[pm &#43; pn] = nums2[pn&#43;&#43;] continue } if (nums1[pm] &gt; nums2[pn]) { result[pm &#43; pn] = nums2[pn&#43;&#43;] } else { result[pm &#43; pn] = nums1[pm&#43;&#43;] } } for (i in 0 until size) { nums1.set(i, result[i]) } } }">
+
+        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
+		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.50b57e12d401420df23965fed157368aba37b76df0ecefd0b1ecd4da664f01a0.css" media="(prefers-color-scheme: dark)"  />
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://localhost:1313/">Leetcode-Solutions</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/posts">Problems</a>
+		
+		<a href="/tags">Tags</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+  <article>
+    <div class="post-container">
+      
+      <div class="post-content">
+        <div class="title">
+          <h1 class="title">88. Merge Sorted Array</h1>
+          <div class="meta">Posted on Jul 26, 2024</div>
+        </div>
+        
+        <section class="body">
+          <h2 id="solution">Solution</h2>
+<h3 id="implementation">Implementation</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">merge</span>(nums1: IntArray, m: Int, nums2: IntArray, n: Int): Unit {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> pm = <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> pn = <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> size = m + n
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> result = nums1.copyOf()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (pm + pn &lt; size) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (pn <span style="color:#f92672">&gt;=</span> n) {
+</span></span><span style="display:flex;"><span>                result[pm + pn] = nums1[pm<span style="color:#f92672">++</span>]
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (pm <span style="color:#f92672">&gt;=</span> m) {
+</span></span><span style="display:flex;"><span>                result[pm + pn] = nums2[pn<span style="color:#f92672">++</span>]
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (nums1[pm] &gt; nums2[pn]) {
+</span></span><span style="display:flex;"><span>                result[pm + pn] = nums2[pn<span style="color:#f92672">++</span>]
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                result[pm + pn] = nums1[pm<span style="color:#f92672">++</span>]
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">0</span> until size) {
+</span></span><span style="display:flex;"><span>            nums1.<span style="color:#66d9ef">set</span>(i, result[i])
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+        </section>
+        <div class="post-tags">
+          
+          
+          <nav class="nav tags">
+            <ul class="tags">
+              
+              <li><a href="/tags/array">Array</a></li>
+              
+              <li><a href="/tags/two-pointers">Two Pointers</a></li>
+              
+              <li><a href="/tags/sorting">Sorting</a></li>
+              
+            </ul>
+          </nav>
+          
+          
+        </div>
+      </div>
+
+      
+      
+    </div>
+
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    (function () {
+        
+        
+        if (window.location.hostname == "localhost")
+            return;
+
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        var disqus_shortname = 'yourDisqusShortname';
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+        Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+</main>
+<footer>
+  <div style="display:flex"><a class="soc" href="https://github.com/ricky9667" rel="me" title="GitHub"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#github" />
+</svg></a><a class="border"></a><a class="soc" href="https://linkedin.com/ricky9667/" rel="me" title="LinkedIn"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#linkedin" />
+</svg></a><a class="border"></a></div>
+  <div class="footer-info">
+    2025  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+</div>
+    </body>
+</html>

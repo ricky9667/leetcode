@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html><head lang="en"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>33. Search in Rotated Sorted Array - Leetcode-Solutions</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Solution
+這題是 153. Find Minimum in Rotated Sorted Array 的延伸，題目要求變成給你一個 target，並且尋找這個排序過且位移的陣列的 target 在哪裡，找不到就回傳 -1。
+我們可以先用 153. Find Minimum in Rotated Sorted Array 裡面的方法二分搜到最小的數字在哪一個位置 p。找到之後我們就可以做第二次二分搜，尋找 p ~ p &#43; n 之間的數字，並且在搜尋過程中取 index % n 的餘數，因為位移後的 index 會超過 n。
+Implementation
+class Solution {
+    fun search(nums: IntArray, target: Int): Int {
+        val n = nums.size
+        var l = 0
+        var r = nums.lastIndex
+
+        while (r - l &gt; 1) {
+            val m = (l &#43; r) / 2
+            if (nums[m] &gt; nums[l] &amp;&amp; nums[m] &gt; nums[r]) l = m
+            else r = m
+        }
+
+        if (nums[l] &gt; nums[r]) l = r 
+        r = l &#43; n
+
+        while (r - l &gt; 1) {
+            val m = (l &#43; r) / 2
+            if (nums[m % n] == target) return m % n
+            if (nums[m % n] &gt; target) r = m
+            else l = m
+        }
+        
+        return if (nums[l % n] == target) l % n else -1
+    }
+}
+" />
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content="http://localhost:1313/posts/33/">
+  <meta property="og:site_name" content="Leetcode-Solutions">
+  <meta property="og:title" content="33. Search in Rotated Sorted Array">
+  <meta property="og:description" content="Solution 這題是 153. Find Minimum in Rotated Sorted Array 的延伸，題目要求變成給你一個 target，並且尋找這個排序過且位移的陣列的 target 在哪裡，找不到就回傳 -1。
+我們可以先用 153. Find Minimum in Rotated Sorted Array 裡面的方法二分搜到最小的數字在哪一個位置 p。找到之後我們就可以做第二次二分搜，尋找 p ~ p &#43; n 之間的數字，並且在搜尋過程中取 index % n 的餘數，因為位移後的 index 會超過 n。
+Implementation class Solution { fun search(nums: IntArray, target: Int): Int { val n = nums.size var l = 0 var r = nums.lastIndex while (r - l &gt; 1) { val m = (l &#43; r) / 2 if (nums[m] &gt; nums[l] &amp;&amp; nums[m] &gt; nums[r]) l = m else r = m } if (nums[l] &gt; nums[r]) l = r r = l &#43; n while (r - l &gt; 1) { val m = (l &#43; r) / 2 if (nums[m % n] == target) return m % n if (nums[m % n] &gt; target) r = m else l = m } return if (nums[l % n] == target) l % n else -1 } }">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-28T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-10-28T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Binary Search">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="33. Search in Rotated Sorted Array">
+  <meta name="twitter:description" content="Solution 這題是 153. Find Minimum in Rotated Sorted Array 的延伸，題目要求變成給你一個 target，並且尋找這個排序過且位移的陣列的 target 在哪裡，找不到就回傳 -1。
+我們可以先用 153. Find Minimum in Rotated Sorted Array 裡面的方法二分搜到最小的數字在哪一個位置 p。找到之後我們就可以做第二次二分搜，尋找 p ~ p &#43; n 之間的數字，並且在搜尋過程中取 index % n 的餘數，因為位移後的 index 會超過 n。
+Implementation class Solution { fun search(nums: IntArray, target: Int): Int { val n = nums.size var l = 0 var r = nums.lastIndex while (r - l &gt; 1) { val m = (l &#43; r) / 2 if (nums[m] &gt; nums[l] &amp;&amp; nums[m] &gt; nums[r]) l = m else r = m } if (nums[l] &gt; nums[r]) l = r r = l &#43; n while (r - l &gt; 1) { val m = (l &#43; r) / 2 if (nums[m % n] == target) return m % n if (nums[m % n] &gt; target) r = m else l = m } return if (nums[l % n] == target) l % n else -1 } }">
+
+        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
+		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.50b57e12d401420df23965fed157368aba37b76df0ecefd0b1ecd4da664f01a0.css" media="(prefers-color-scheme: dark)"  />
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://localhost:1313/">Leetcode-Solutions</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/posts">Problems</a>
+		
+		<a href="/tags">Tags</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+  <article>
+    <div class="post-container">
+      
+      <div class="post-content">
+        <div class="title">
+          <h1 class="title">33. Search in Rotated Sorted Array</h1>
+          <div class="meta">Posted on Oct 28, 2024</div>
+        </div>
+        
+        <section class="body">
+          <h2 id="solution">Solution</h2>
+<p>這題是 <a href="../153/">153. Find Minimum in Rotated Sorted Array</a> 的延伸，題目要求變成給你一個 <code>target</code>，並且尋找這個排序過且位移的陣列的 <code>target</code> 在哪裡，找不到就回傳 <code>-1</code>。</p>
+<p>我們可以先用 <a href="../153/">153. Find Minimum in Rotated Sorted Array</a> 裡面的方法二分搜到最小的數字在哪一個位置 <code>p</code>。找到之後我們就可以做第二次二分搜，尋找 <code>p</code> ~ <code>p + n</code> 之間的數字，並且在搜尋過程中取 index % n 的餘數，因為位移後的 index 會超過 n。</p>
+<h3 id="implementation">Implementation</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">search</span>(nums: IntArray, target: Int): Int {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> n = nums.size
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> l = <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> r = nums.lastIndex
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (r - l &gt; <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">val</span> m = (l + r) / <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (nums[m] &gt; nums[l] <span style="color:#f92672">&amp;&amp;</span> nums[m] &gt; nums[r]) l = m
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> r = m
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (nums[l] &gt; nums[r]) l = r 
+</span></span><span style="display:flex;"><span>        r = l + n
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (r - l &gt; <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">val</span> m = (l + r) / <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (nums[m % n] <span style="color:#f92672">==</span> target) <span style="color:#66d9ef">return</span> m % n
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (nums[m % n] &gt; target) r = m
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> l = m
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">if</span> (nums[l % n] <span style="color:#f92672">==</span> target) l % n <span style="color:#66d9ef">else</span> -<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+        </section>
+        <div class="post-tags">
+          
+          
+          <nav class="nav tags">
+            <ul class="tags">
+              
+              <li><a href="/tags/array">Array</a></li>
+              
+              <li><a href="/tags/binary-search">Binary Search</a></li>
+              
+            </ul>
+          </nav>
+          
+          
+        </div>
+      </div>
+
+      
+      
+    </div>
+
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    (function () {
+        
+        
+        if (window.location.hostname == "localhost")
+            return;
+
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        var disqus_shortname = 'yourDisqusShortname';
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+        Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+</main>
+<footer>
+  <div style="display:flex"><a class="soc" href="https://github.com/ricky9667" rel="me" title="GitHub"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#github" />
+</svg></a><a class="border"></a><a class="soc" href="https://linkedin.com/ricky9667/" rel="me" title="LinkedIn"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#linkedin" />
+</svg></a><a class="border"></a></div>
+  <div class="footer-info">
+    2025  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+</div>
+    </body>
+</html>

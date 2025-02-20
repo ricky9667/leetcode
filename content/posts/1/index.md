@@ -1,7 +1,7 @@
 ---
 title: 1. Two Sum
 description: 
-date: 2024-10-11
+date: 2024-10-13
 tags: [Array, Hash Table]
 ---
 

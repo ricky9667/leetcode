@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html><head lang="en"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>45. Jump Game II - Leetcode-Solutions</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Solution 1
+使用動態規劃 Dynamic Programming，從頭開始迭代 nums，迭代每個數字時去尋找 「跳到目前的 index 最少需要 Jump 幾次」，並紀錄至 steps[i]。
+尋找「跳到目前的 index 最少需要 Jump 幾次」時，用一個迴圈去看每一個 0 ~ i-1 裡面 「能跳到 i 的位置中， steps[i] 最小的 index」， i 為上面提到迭代每個數字時目前的 index。
+最後回傳 steps 中的最後一個數字即為答案， 複雜度為 O(n^2)。
+以下 example 的 position[i] 為每個 index 可以跳到的最大 index，後來都被直接簡化成 i &#43; nums[i] 不存在陣列中。
+Example 1-1
+
+  
+      
+          i
+          nums[i]
+          steps[i]
+          position[i] = i &#43; nums[i]
+      
+  
+  
+      
+          0
+          2
+          0
+          2
+      
+      
+          1
+          3
+          1
+          4
+      
+      
+          2
+          1
+          1
+          3
+      
+      
+          3
+          1
+          2
+          4
+      
+      
+          4
+          4
+          2
+          4
+      
+  
+
+Example 1-2
+
+  
+      
+          i
+          nums[i]
+          steps[i]
+          position[i] = i &#43; nums[i]
+      
+  
+  
+      
+          0
+          2
+          0
+          2
+      
+      
+          1
+          3
+          1
+          4
+      
+      
+          2
+          0
+          1
+          2
+      
+      
+          3
+          1
+          2
+          4
+      
+      
+          4
+          4
+          2
+          4
+      
+  
+
+Implementation
+class Solution {
+    fun jump(nums: IntArray): Int {
+        var steps = mutableListOf&lt;Int&gt;()
+        steps.add(0)
+
+        for (i in 1 until nums.size) {
+            var minStepsToIndex = i
+
+            for (j in 0 until steps.size) {
+                // j &#43; nums[j] = max reachable position for index `j`
+                if (j &#43; nums[j] &gt;= i) {
+                    minStepsToIndex = min(minStepsToIndex, steps[j] &#43; 1)
+                }
+            }
+
+            steps.add(minStepsToIndex)
+        }
+
+        return steps.last()
+    }
+}
+Solution 2
+使用貪婪演算法 Greedy。currentJumpIndex 代表跳 jumps 次最遠可以跳到的位置，targetJumpIndex 代表跳 jumps &#43; 1 次最遠可以跳到的位置。" />
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content="http://localhost:1313/posts/45/">
+  <meta property="og:site_name" content="Leetcode-Solutions">
+  <meta property="og:title" content="45. Jump Game II">
+  <meta property="og:description" content="Solution 1 使用動態規劃 Dynamic Programming，從頭開始迭代 nums，迭代每個數字時去尋找 「跳到目前的 index 最少需要 Jump 幾次」，並紀錄至 steps[i]。
+尋找「跳到目前的 index 最少需要 Jump 幾次」時，用一個迴圈去看每一個 0 ~ i-1 裡面 「能跳到 i 的位置中， steps[i] 最小的 index」， i 為上面提到迭代每個數字時目前的 index。
+最後回傳 steps 中的最後一個數字即為答案， 複雜度為 O(n^2)。
+以下 example 的 position[i] 為每個 index 可以跳到的最大 index，後來都被直接簡化成 i &#43; nums[i] 不存在陣列中。
+Example 1-1 i nums[i] steps[i] position[i] = i &#43; nums[i] 0 2 0 2 1 3 1 4 2 1 1 3 3 1 2 4 4 4 2 4 Example 1-2 i nums[i] steps[i] position[i] = i &#43; nums[i] 0 2 0 2 1 3 1 4 2 0 1 2 3 1 2 4 4 4 2 4 Implementation class Solution { fun jump(nums: IntArray): Int { var steps = mutableListOf&lt;Int&gt;() steps.add(0) for (i in 1 until nums.size) { var minStepsToIndex = i for (j in 0 until steps.size) { // j &#43; nums[j] = max reachable position for index `j` if (j &#43; nums[j] &gt;= i) { minStepsToIndex = min(minStepsToIndex, steps[j] &#43; 1) } } steps.add(minStepsToIndex) } return steps.last() } } Solution 2 使用貪婪演算法 Greedy。currentJumpIndex 代表跳 jumps 次最遠可以跳到的位置，targetJumpIndex 代表跳 jumps &#43; 1 次最遠可以跳到的位置。">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-09-30T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-09-30T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Dynamic Programming">
+    <meta property="article:tag" content="Greedy">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="45. Jump Game II">
+  <meta name="twitter:description" content="Solution 1 使用動態規劃 Dynamic Programming，從頭開始迭代 nums，迭代每個數字時去尋找 「跳到目前的 index 最少需要 Jump 幾次」，並紀錄至 steps[i]。
+尋找「跳到目前的 index 最少需要 Jump 幾次」時，用一個迴圈去看每一個 0 ~ i-1 裡面 「能跳到 i 的位置中， steps[i] 最小的 index」， i 為上面提到迭代每個數字時目前的 index。
+最後回傳 steps 中的最後一個數字即為答案， 複雜度為 O(n^2)。
+以下 example 的 position[i] 為每個 index 可以跳到的最大 index，後來都被直接簡化成 i &#43; nums[i] 不存在陣列中。
+Example 1-1 i nums[i] steps[i] position[i] = i &#43; nums[i] 0 2 0 2 1 3 1 4 2 1 1 3 3 1 2 4 4 4 2 4 Example 1-2 i nums[i] steps[i] position[i] = i &#43; nums[i] 0 2 0 2 1 3 1 4 2 0 1 2 3 1 2 4 4 4 2 4 Implementation class Solution { fun jump(nums: IntArray): Int { var steps = mutableListOf&lt;Int&gt;() steps.add(0) for (i in 1 until nums.size) { var minStepsToIndex = i for (j in 0 until steps.size) { // j &#43; nums[j] = max reachable position for index `j` if (j &#43; nums[j] &gt;= i) { minStepsToIndex = min(minStepsToIndex, steps[j] &#43; 1) } } steps.add(minStepsToIndex) } return steps.last() } } Solution 2 使用貪婪演算法 Greedy。currentJumpIndex 代表跳 jumps 次最遠可以跳到的位置，targetJumpIndex 代表跳 jumps &#43; 1 次最遠可以跳到的位置。">
+
+        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
+		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.50b57e12d401420df23965fed157368aba37b76df0ecefd0b1ecd4da664f01a0.css" media="(prefers-color-scheme: dark)"  />
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://localhost:1313/">Leetcode-Solutions</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/posts">Problems</a>
+		
+		<a href="/tags">Tags</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+  <article>
+    <div class="post-container">
+      
+      <div class="post-content">
+        <div class="title">
+          <h1 class="title">45. Jump Game II</h1>
+          <div class="meta">Posted on Sep 30, 2024</div>
+        </div>
+        
+        <section class="body">
+          <h2 id="solution-1">Solution 1</h2>
+<p>使用動態規劃 Dynamic Programming，從頭開始迭代 <code>nums</code>，迭代每個數字時去尋找 <strong>「跳到目前的 index 最少需要 Jump 幾次」</strong>，並紀錄至 <code>steps[i]</code>。</p>
+<p>尋找「跳到目前的 index 最少需要 Jump 幾次」時，用一個迴圈去看每一個 <code>0</code> ~ <code>i-1</code> 裡面 <strong>「能跳到 i 的位置中， <code>steps[i]</code> 最小的 index」</strong>， <code>i</code> 為上面提到迭代每個數字時目前的 index。</p>
+<p>最後回傳 <code>steps</code> 中的最後一個數字即為答案， <strong>複雜度為 O(n^2)</strong>。</p>
+<p>以下 example 的 <code>position[i]</code> 為每個 index 可以跳到的最大 index，後來都被直接簡化成 i + nums[i] 不存在陣列中。</p>
+<h3 id="example-1-1">Example 1-1</h3>
+<table>
+  <thead>
+      <tr>
+          <th><code>i</code></th>
+          <th><code>nums[i]</code></th>
+          <th><code>steps[i]</code></th>
+          <th><code>position[i] = i + nums[i]</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0</td>
+          <td>2</td>
+          <td>0</td>
+          <td>2</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>3</td>
+          <td>1</td>
+          <td>4</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>1</td>
+          <td>1</td>
+          <td>3</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>1</td>
+          <td>2</td>
+          <td>4</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>4</td>
+          <td>2</td>
+          <td>4</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="example-1-2">Example 1-2</h3>
+<table>
+  <thead>
+      <tr>
+          <th><code>i</code></th>
+          <th><code>nums[i]</code></th>
+          <th><code>steps[i]</code></th>
+          <th><code>position[i] = i + nums[i]</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0</td>
+          <td>2</td>
+          <td>0</td>
+          <td>2</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>3</td>
+          <td>1</td>
+          <td>4</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>0</td>
+          <td>1</td>
+          <td>2</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>1</td>
+          <td>2</td>
+          <td>4</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>4</td>
+          <td>2</td>
+          <td>4</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="implementation">Implementation</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">jump</span>(nums: IntArray): Int {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> steps = mutableListOf&lt;Int&gt;()
+</span></span><span style="display:flex;"><span>        steps.add(<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span> until nums.size) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">var</span> minStepsToIndex = i
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (j <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">0</span> until steps.size) {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// j + nums[j] = max reachable position for index `j`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">if</span> (j + nums[j] <span style="color:#f92672">&gt;=</span> i) {
+</span></span><span style="display:flex;"><span>                    minStepsToIndex = min(minStepsToIndex, steps[j] + <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            steps.add(minStepsToIndex)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> steps.last()
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="solution-2">Solution 2</h2>
+<p>使用貪婪演算法 Greedy。<code>currentJumpIndex</code> 代表跳 <code>jumps</code> 次最遠可以跳到的位置，<code>targetJumpIndex</code> 代表跳 <code>jumps + 1</code> 次最遠可以跳到的位置。</p>
+<p>以目前的 <code>jumps</code> 看下一個跳的位置最遠可以到哪，如果能比 <code>targetJumpIndex</code> 更遠就把更新這個值。
+如果 <code>i</code> &gt; <code>currentJumpIndex</code> 就代表 <code>currentJumpIndex</code> 能看的下一步都看完了。
+開始看下一個可以跳的位置，也就是 <code>jump + 1</code> 的位置，因此把 <code>jump++</code>、<code>currentJumpIndex</code> 換成 <code>targetJumpIndex</code>。</p>
+<p>因為 <code>currentJumpIndex</code> 最後結束的位置就是 <code>nums</code> 的最後一個 index，因此回傳 <code>jumps</code> 為解答，<strong>複雜度為 O(n)</strong>。</p>
+<h3 id="example-2-1">Example 2-1</h3>
+<table>
+  <thead>
+      <tr>
+          <th><code>nums</code></th>
+          <th><code>jumps</code></th>
+          <th><code>currentJumpIndex</code></th>
+          <th><code>targetJumpIndex</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>2</td>
+          <td>0</td>
+          <td>0</td>
+          <td>2</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>1</td>
+          <td>2</td>
+          <td>4</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>2</td>
+          <td>4</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>4</td>
+          <td>4</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td><strong>2</strong></td>
+          <td>4</td>
+          <td>-</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="example-2-2">Example 2-2</h3>
+<table>
+  <thead>
+      <tr>
+          <th><code>nums</code></th>
+          <th><code>jumps</code></th>
+          <th><code>currentJumpIndex</code></th>
+          <th><code>targetJumpIndex</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>2</td>
+          <td>0</td>
+          <td>0</td>
+          <td>2</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>1</td>
+          <td>2</td>
+          <td>4</td>
+      </tr>
+      <tr>
+          <td>0</td>
+          <td>1</td>
+          <td>2</td>
+          <td>4</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>4</td>
+          <td>4</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td><strong>2</strong></td>
+          <td>4</td>
+          <td>-</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="example-2-3">Example 2-3</h3>
+<table>
+  <thead>
+      <tr>
+          <th><code>nums</code></th>
+          <th><code>jumps</code></th>
+          <th><code>currentJumpIndex</code></th>
+          <th><code>targetJumpIndex</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>0</td>
+          <td>0</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>2</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>2</td>
+          <td>3</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td><strong>3</strong></td>
+          <td>3</td>
+          <td>-</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="implementation-1">Implementation</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">jump</span>(nums: IntArray): Int {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> currentJumpIndex = <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> targetJumpIndex = nums[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> jumps = <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">0</span> until nums.size) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (i &gt; currentJumpIndex) {
+</span></span><span style="display:flex;"><span>                jumps<span style="color:#f92672">++</span>
+</span></span><span style="display:flex;"><span>                currentJumpIndex = targetJumpIndex
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (i + nums[i] &gt; targetJumpIndex) {
+</span></span><span style="display:flex;"><span>                targetJumpIndex = i + nums[i]
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> jumps
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+        </section>
+        <div class="post-tags">
+          
+          
+          <nav class="nav tags">
+            <ul class="tags">
+              
+              <li><a href="/tags/array">Array</a></li>
+              
+              <li><a href="/tags/dynamic-programming">Dynamic Programming</a></li>
+              
+              <li><a href="/tags/greedy">Greedy</a></li>
+              
+            </ul>
+          </nav>
+          
+          
+        </div>
+      </div>
+
+      
+      
+    </div>
+
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    (function () {
+        
+        
+        if (window.location.hostname == "localhost")
+            return;
+
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        var disqus_shortname = 'yourDisqusShortname';
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+        Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+</main>
+<footer>
+  <div style="display:flex"><a class="soc" href="https://github.com/ricky9667" rel="me" title="GitHub"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#github" />
+</svg></a><a class="border"></a><a class="soc" href="https://linkedin.com/ricky9667/" rel="me" title="LinkedIn"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#linkedin" />
+</svg></a><a class="border"></a></div>
+  <div class="footer-info">
+    2025  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+</div>
+    </body>
+</html>

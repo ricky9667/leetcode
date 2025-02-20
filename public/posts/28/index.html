@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html><head lang="en"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>28. Find the Index of the First Occurrence in a String - Leetcode-Solutions</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Solution 1
+Kotlin 的語法糖XD
+Implementation
+class Solution {
+    fun strStr(haystack: String, needle: String): Int = haystack.indexOf(needle)
+}
+Solution 2
+當然不能像上面這樣偷懶，所以還是實作一下XD
+作法就是外面一層迴圈 i 看 haystack 起始點從哪裡開始，每一個 i 裡面再跑一個迴圈用 j 看 needle 的 index，然後比對 haystack 從 i 開始的字串有沒有跟 needle 一樣。
+另外 finalIndex 的用途是提早結束迴圈，如果 haystack 從 i 開始算到最後的長度比 needle 還小，那不可能會找到相同字串。
+Implementation
+class Solution {
+    fun strStr(haystack: String, needle: String): Int {
+        val finalIndex = haystack.length - needle.length &#43; 1
+        
+        // i = haystackIndex, j = needleIndex
+        for (i in 0 until finalIndex) {
+            for (j in 0 until needle.length) {
+                if (haystack[i&#43;j] != needle[j]) break
+                if (j == needle.lastIndex) return i
+            }
+        }
+
+        return -1
+    }
+}
+" />
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content="http://localhost:1313/posts/28/">
+  <meta property="og:site_name" content="Leetcode-Solutions">
+  <meta property="og:title" content="28. Find the Index of the First Occurrence in a String">
+  <meta property="og:description" content="Solution 1 Kotlin 的語法糖XD
+Implementation class Solution { fun strStr(haystack: String, needle: String): Int = haystack.indexOf(needle) } Solution 2 當然不能像上面這樣偷懶，所以還是實作一下XD 作法就是外面一層迴圈 i 看 haystack 起始點從哪裡開始，每一個 i 裡面再跑一個迴圈用 j 看 needle 的 index，然後比對 haystack 從 i 開始的字串有沒有跟 needle 一樣。 另外 finalIndex 的用途是提早結束迴圈，如果 haystack 從 i 開始算到最後的長度比 needle 還小，那不可能會找到相同字串。
+Implementation class Solution { fun strStr(haystack: String, needle: String): Int { val finalIndex = haystack.length - needle.length &#43; 1 // i = haystackIndex, j = needleIndex for (i in 0 until finalIndex) { for (j in 0 until needle.length) { if (haystack[i&#43;j] != needle[j]) break if (j == needle.lastIndex) return i } } return -1 } }">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-10T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-10-10T00:00:00+00:00">
+    <meta property="article:tag" content="Two Pointers">
+    <meta property="article:tag" content="String">
+    <meta property="article:tag" content="String Matching">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="28. Find the Index of the First Occurrence in a String">
+  <meta name="twitter:description" content="Solution 1 Kotlin 的語法糖XD
+Implementation class Solution { fun strStr(haystack: String, needle: String): Int = haystack.indexOf(needle) } Solution 2 當然不能像上面這樣偷懶，所以還是實作一下XD 作法就是外面一層迴圈 i 看 haystack 起始點從哪裡開始，每一個 i 裡面再跑一個迴圈用 j 看 needle 的 index，然後比對 haystack 從 i 開始的字串有沒有跟 needle 一樣。 另外 finalIndex 的用途是提早結束迴圈，如果 haystack 從 i 開始算到最後的長度比 needle 還小，那不可能會找到相同字串。
+Implementation class Solution { fun strStr(haystack: String, needle: String): Int { val finalIndex = haystack.length - needle.length &#43; 1 // i = haystackIndex, j = needleIndex for (i in 0 until finalIndex) { for (j in 0 until needle.length) { if (haystack[i&#43;j] != needle[j]) break if (j == needle.lastIndex) return i } } return -1 } }">
+
+        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
+		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.50b57e12d401420df23965fed157368aba37b76df0ecefd0b1ecd4da664f01a0.css" media="(prefers-color-scheme: dark)"  />
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://localhost:1313/">Leetcode-Solutions</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/posts">Problems</a>
+		
+		<a href="/tags">Tags</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+  <article>
+    <div class="post-container">
+      
+      <div class="post-content">
+        <div class="title">
+          <h1 class="title">28. Find the Index of the First Occurrence in a String</h1>
+          <div class="meta">Posted on Oct 10, 2024</div>
+        </div>
+        
+        <section class="body">
+          <h2 id="solution-1">Solution 1</h2>
+<p>Kotlin 的語法糖XD</p>
+<h3 id="implementation">Implementation</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">strStr</span>(haystack: String, needle: String): Int = haystack.indexOf(needle)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="solution-2">Solution 2</h2>
+<p>當然不能像上面這樣偷懶，所以還是實作一下XD
+作法就是外面一層迴圈 <code>i</code> 看 <code>haystack</code> 起始點從哪裡開始，每一個 <code>i</code> 裡面再跑一個迴圈用 <code>j</code> 看 <code>needle</code> 的 index，然後比對 <code>haystack</code> 從 <code>i</code> 開始的字串有沒有跟 <code>needle</code> 一樣。
+另外 <code>finalIndex</code> 的用途是提早結束迴圈，如果 <code>haystack</code> 從 <code>i</code> 開始算到最後的長度比 <code>needle</code> 還小，那不可能會找到相同字串。</p>
+<h3 id="implementation-1">Implementation</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">strStr</span>(haystack: String, needle: String): Int {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> finalIndex = haystack.length - needle.length + <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// i = haystackIndex, j = needleIndex
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">0</span> until finalIndex) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (j <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">0</span> until needle.length) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (haystack[i+j] <span style="color:#f92672">!=</span> needle[j]) <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (j <span style="color:#f92672">==</span> needle.lastIndex) <span style="color:#66d9ef">return</span> i
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> -<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+        </section>
+        <div class="post-tags">
+          
+          
+          <nav class="nav tags">
+            <ul class="tags">
+              
+              <li><a href="/tags/two-pointers">Two Pointers</a></li>
+              
+              <li><a href="/tags/string">String</a></li>
+              
+              <li><a href="/tags/string-matching">String Matching</a></li>
+              
+            </ul>
+          </nav>
+          
+          
+        </div>
+      </div>
+
+      
+      
+    </div>
+
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    (function () {
+        
+        
+        if (window.location.hostname == "localhost")
+            return;
+
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        var disqus_shortname = 'yourDisqusShortname';
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+        Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+</main>
+<footer>
+  <div style="display:flex"><a class="soc" href="https://github.com/ricky9667" rel="me" title="GitHub"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#github" />
+</svg></a><a class="border"></a><a class="soc" href="https://linkedin.com/ricky9667/" rel="me" title="LinkedIn"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#linkedin" />
+</svg></a><a class="border"></a></div>
+  <div class="footer-info">
+    2025  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+</div>
+    </body>
+</html>

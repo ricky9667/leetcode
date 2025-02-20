@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html><head lang="en"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>146. LRU Cache - Leetcode-Solutions</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Solution 1
+實作雙向的 Linked List 並用 dummy start &amp; end node 管理。使用過就用 removeNode() &#43; insertNodeAtStart() 重新插入到最前面。超過 capacity 就用 removeNode() 並從 map 中移除。
+Implementation
+class LRUCache(capacity: Int) {
+
+    val maxSize = capacity
+    val map = mutableMapOf&lt;Int, Node&gt;()
+    val start: Node = Node(0, 0)
+    var end: Node = Node(0, 0)
+
+    init {
+        start.next = end
+        end.prev = start
+    }
+
+    fun get(key: Int): Int {
+        val node = map[key] ?: return -1
+
+        removeNode(node)
+        insertNodeAtStart(node)
+        return node.value
+    }
+
+    fun put(key: Int, value: Int) {
+        if (key in map) {
+            val node = map[key] ?: return
+            node.value = value
+            removeNode(node)
+            insertNodeAtStart(node)
+        } else {
+            val node = Node(key, value)
+            map[key] = node
+            insertNodeAtStart(node)
+
+            if (map.keys.size &gt; maxSize) {
+                end.prev?.let { lruNode -&gt;
+                    removeNode(lruNode)
+                    map.remove(lruNode.key)
+                }
+            }
+        }
+    }
+
+    private fun removeNode(node: Node) {
+        val (prev, next) = node.prev to node.next
+        prev?.let { it.next = next }
+        next?.let { it.prev = prev }
+    }
+
+    private fun insertNodeAtStart(node: Node) {
+        val next = start.next
+        start.next = node
+        node.prev = start
+        node.next = next
+        next?.let { it.prev = node }
+    }
+}
+
+class Node(val key: Int, var value: Int) {
+    var next: Node? = null
+    var prev: Node? = null
+}
+Solution 2
+使用 Kotlin 的 LinkedHashMap 就能保留資料進入 Map 的順序，這題就變超級簡單了 :D" />
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content="http://localhost:1313/posts/146/">
+  <meta property="og:site_name" content="Leetcode-Solutions">
+  <meta property="og:title" content="146. LRU Cache">
+  <meta property="og:description" content="Solution 1 實作雙向的 Linked List 並用 dummy start &amp; end node 管理。使用過就用 removeNode() &#43; insertNodeAtStart() 重新插入到最前面。超過 capacity 就用 removeNode() 並從 map 中移除。
+Implementation class LRUCache(capacity: Int) { val maxSize = capacity val map = mutableMapOf&lt;Int, Node&gt;() val start: Node = Node(0, 0) var end: Node = Node(0, 0) init { start.next = end end.prev = start } fun get(key: Int): Int { val node = map[key] ?: return -1 removeNode(node) insertNodeAtStart(node) return node.value } fun put(key: Int, value: Int) { if (key in map) { val node = map[key] ?: return node.value = value removeNode(node) insertNodeAtStart(node) } else { val node = Node(key, value) map[key] = node insertNodeAtStart(node) if (map.keys.size &gt; maxSize) { end.prev?.let { lruNode -&gt; removeNode(lruNode) map.remove(lruNode.key) } } } } private fun removeNode(node: Node) { val (prev, next) = node.prev to node.next prev?.let { it.next = next } next?.let { it.prev = prev } } private fun insertNodeAtStart(node: Node) { val next = start.next start.next = node node.prev = start node.next = next next?.let { it.prev = node } } } class Node(val key: Int, var value: Int) { var next: Node? = null var prev: Node? = null } Solution 2 使用 Kotlin 的 LinkedHashMap 就能保留資料進入 Map 的順序，這題就變超級簡單了 :D">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-12-28T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-12-28T00:00:00+00:00">
+    <meta property="article:tag" content="Hash Table">
+    <meta property="article:tag" content="Linked List">
+    <meta property="article:tag" content="Design">
+    <meta property="article:tag" content="Doubly-Linked List">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="146. LRU Cache">
+  <meta name="twitter:description" content="Solution 1 實作雙向的 Linked List 並用 dummy start &amp; end node 管理。使用過就用 removeNode() &#43; insertNodeAtStart() 重新插入到最前面。超過 capacity 就用 removeNode() 並從 map 中移除。
+Implementation class LRUCache(capacity: Int) { val maxSize = capacity val map = mutableMapOf&lt;Int, Node&gt;() val start: Node = Node(0, 0) var end: Node = Node(0, 0) init { start.next = end end.prev = start } fun get(key: Int): Int { val node = map[key] ?: return -1 removeNode(node) insertNodeAtStart(node) return node.value } fun put(key: Int, value: Int) { if (key in map) { val node = map[key] ?: return node.value = value removeNode(node) insertNodeAtStart(node) } else { val node = Node(key, value) map[key] = node insertNodeAtStart(node) if (map.keys.size &gt; maxSize) { end.prev?.let { lruNode -&gt; removeNode(lruNode) map.remove(lruNode.key) } } } } private fun removeNode(node: Node) { val (prev, next) = node.prev to node.next prev?.let { it.next = next } next?.let { it.prev = prev } } private fun insertNodeAtStart(node: Node) { val next = start.next start.next = node node.prev = start node.next = next next?.let { it.prev = node } } } class Node(val key: Int, var value: Int) { var next: Node? = null var prev: Node? = null } Solution 2 使用 Kotlin 的 LinkedHashMap 就能保留資料進入 Map 的順序，這題就變超級簡單了 :D">
+
+        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
+		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.50b57e12d401420df23965fed157368aba37b76df0ecefd0b1ecd4da664f01a0.css" media="(prefers-color-scheme: dark)"  />
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://localhost:1313/">Leetcode-Solutions</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/posts">Problems</a>
+		
+		<a href="/tags">Tags</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+  <article>
+    <div class="post-container">
+      
+      <div class="post-content">
+        <div class="title">
+          <h1 class="title">146. LRU Cache</h1>
+          <div class="meta">Posted on Dec 28, 2024</div>
+        </div>
+        
+        <section class="body">
+          <h2 id="solution-1">Solution 1</h2>
+<p>實作雙向的 Linked List 並用 dummy start &amp; end node 管理。使用過就用 <code>removeNode()</code> + <code>insertNodeAtStart()</code> 重新插入到最前面。超過 capacity 就用 <code>removeNode()</code> 並從 map 中移除。</p>
+<h3 id="implementation">Implementation</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LRUCache</span>(capacity: Int) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> maxSize = capacity
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> map = mutableMapOf&lt;Int, Node&gt;()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> start: Node = Node(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> end: Node = Node(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">init</span> {
+</span></span><span style="display:flex;"><span>        start.next = end
+</span></span><span style="display:flex;"><span>        end.prev = start
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">get</span>(key: Int): Int {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> node = map[key] <span style="color:#f92672">?:</span> <span style="color:#66d9ef">return</span> -<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        removeNode(node)
+</span></span><span style="display:flex;"><span>        insertNodeAtStart(node)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> node.<span style="color:#66d9ef">value</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">put</span>(key: Int, <span style="color:#66d9ef">value</span>: Int) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (key <span style="color:#66d9ef">in</span> map) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">val</span> node = map[key] <span style="color:#f92672">?:</span> <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>            node.<span style="color:#66d9ef">value</span> = <span style="color:#66d9ef">value</span>
+</span></span><span style="display:flex;"><span>            removeNode(node)
+</span></span><span style="display:flex;"><span>            insertNodeAtStart(node)
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">val</span> node = Node(key, <span style="color:#66d9ef">value</span>)
+</span></span><span style="display:flex;"><span>            map[key] = node
+</span></span><span style="display:flex;"><span>            insertNodeAtStart(node)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (map.keys.size &gt; maxSize) {
+</span></span><span style="display:flex;"><span>                end.prev<span style="color:#f92672">?.</span>let { lruNode <span style="color:#f92672">-&gt;</span>
+</span></span><span style="display:flex;"><span>                    removeNode(lruNode)
+</span></span><span style="display:flex;"><span>                    map.remove(lruNode.key)
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">removeNode</span>(node: Node) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> <span style="color:#960050;background-color:#1e0010">(</span>prev, next) = node.prev to node.next
+</span></span><span style="display:flex;"><span>        prev<span style="color:#f92672">?.</span>let { <span style="color:#66d9ef">it</span>.next = next }
+</span></span><span style="display:flex;"><span>        next<span style="color:#f92672">?.</span>let { <span style="color:#66d9ef">it</span>.prev = prev }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">insertNodeAtStart</span>(node: Node) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> next = start.next
+</span></span><span style="display:flex;"><span>        start.next = node
+</span></span><span style="display:flex;"><span>        node.prev = start
+</span></span><span style="display:flex;"><span>        node.next = next
+</span></span><span style="display:flex;"><span>        next<span style="color:#f92672">?.</span>let { <span style="color:#66d9ef">it</span>.prev = node }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Node</span>(<span style="color:#66d9ef">val</span> key: Int, <span style="color:#66d9ef">var</span> value: Int) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> next: Node? = <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> prev: Node? = <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="solution-2">Solution 2</h3>
+<p>使用 Kotlin 的 <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-linked-hash-map/">LinkedHashMap</a> 就能保留資料進入 Map 的順序，這題就變超級簡單了 :D</p>
+<h3 id="implementation-1">Implementation</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LRUCache</span>(capacity: Int) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> maxSize = capacity
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> map = linkedMapOf&lt;Int, Int&gt;()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">get</span>(key: Int): Int {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> value = map[key] <span style="color:#f92672">?:</span> <span style="color:#66d9ef">return</span> -<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        map.remove(key)
+</span></span><span style="display:flex;"><span>        map[key] = <span style="color:#66d9ef">value</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">value</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">put</span>(key: Int, <span style="color:#66d9ef">value</span>: Int) {
+</span></span><span style="display:flex;"><span>        map.remove(key)
+</span></span><span style="display:flex;"><span>        map[key] = <span style="color:#66d9ef">value</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (map.size &gt; maxSize) {
+</span></span><span style="display:flex;"><span>            map.remove(map.keys.first())
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+        </section>
+        <div class="post-tags">
+          
+          
+          <nav class="nav tags">
+            <ul class="tags">
+              
+              <li><a href="/tags/hash-table">Hash Table</a></li>
+              
+              <li><a href="/tags/linked-list">Linked List</a></li>
+              
+              <li><a href="/tags/design">Design</a></li>
+              
+              <li><a href="/tags/doubly-linked-list">Doubly-Linked List</a></li>
+              
+            </ul>
+          </nav>
+          
+          
+        </div>
+      </div>
+
+      
+      
+    </div>
+
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    (function () {
+        
+        
+        if (window.location.hostname == "localhost")
+            return;
+
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        var disqus_shortname = 'yourDisqusShortname';
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+        Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+</main>
+<footer>
+  <div style="display:flex"><a class="soc" href="https://github.com/ricky9667" rel="me" title="GitHub"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#github" />
+</svg></a><a class="border"></a><a class="soc" href="https://linkedin.com/ricky9667/" rel="me" title="LinkedIn"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#linkedin" />
+</svg></a><a class="border"></a></div>
+  <div class="footer-info">
+    2025  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+</div>
+    </body>
+</html>
