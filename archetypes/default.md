@@ -1,9 +1,6 @@
 ---
-title: Title of the post
+title: Title
 description:
 date: '{{ .Date }}'
-tldr: (optional)
-draft: true/false (optional)
-tags: [tag names] (optional)
-toc: true/false (optional)
+tags: []
 ---
