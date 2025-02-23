@@ -2,7 +2,7 @@
 title: 207. Course Schedule
 description:
 date: '2025-02-23T15:59:59+08:00'
-tags: [tag names]
+tags: [Depth-First Search, Breadth-First Search, Graph, Topological Sort]
 ---
 
 ## Solution
