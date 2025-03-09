@@ -9,7 +9,7 @@ pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
 
 [params]
-mode = "auto"
+mode = "toggle"
 useCDN = false
 subtitle = "Ricky's Leetcode Solutions"
 
