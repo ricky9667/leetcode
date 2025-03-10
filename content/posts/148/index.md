@@ -41,31 +41,19 @@ class Solution {
         var current = dummy
         var (l, r) = left to right
 
-        fun selectLeft() {
-            current.next = l
-            current = current.next
-            l = l?.next
-        }
-
-        fun selectRight() {
-            current.next = r
-            current = current.next
-            r = r?.next
-        }
-
-        while (l != null || r != null) {
-            when {
-                l == null -> selectRight()
-                r == null -> selectLeft()
-                else -> {
-                    if (l!!.`val` < r!!.`val`) {
-                        selectLeft()
-                    } else {
-                        selectRight()
-                    }
-                }
+        while (l != null && r != null) {
+            if (l!!.`val` < r!!.`val`) {
+                current.next = l
+                l = l?.next
+            } else {
+                current.next = r
+                r = r?.next
             }
+            current = current.next
         }
+        
+        if (l == null) current.next = r
+        if (r == null) current.next = l
 
         return dummy.next
     }
