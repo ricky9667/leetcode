@@ -8,6 +8,7 @@ tags: [Array, Dynamic Programming]
 ## Solution
 
 - 在 `dp` 中存三角形第 `i` 層每個位置最小路徑和是多少， `i` 跑到下一層時再覆蓋掉上一層。每一次更新 dp 必須從 last index 倒過來算，index 0 需要是最後算的，不然會被覆蓋掉。
+- 倒過來比較好做
 - Time: `O(n^2)`, Space: `O(n)`
 
 ### Implementation
@@ -28,6 +29,24 @@ class Solution {
         }
 
         return dp.min()
+    }
+}
+```
+
+### Implementation 2
+
+```kotlin
+class Solution {
+    fun minimumTotal(triangle: List<List<Int>>): Int {
+        val dp = IntArray(triangle.size + 1)
+
+        for (i in triangle.size - 1 downTo 0) {
+            for (j in 0..i) {
+                dp[j] = triangle[i][j] + min(dp[j], dp[j + 1])
+            }
+        }
+
+        return dp[0]
     }
 }
 ```
