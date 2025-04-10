@@ -18,7 +18,7 @@ subtitle = "Ricky's Leetcode Solutions"
 [[params.social]]
 name = "GitHub"
 icon = "github"
-url = "https://github.com/ricky9667"
+url = "https://github.com/ricky9667/leetcode"
 
 [[params.social]]
 name = "LinkedIn"
