@@ -9,9 +9,9 @@ tags: [Array, Dynamic Programming, Matrix]
 
 `dp[i][j]` 代表 `index = (i, j)` 的路徑數，路徑數會是上面的跟左邊的路徑數和，如果遇到障礙物或牆壁則路徑數為 `0`。
 
-Time: `O(MN)`, Space: `O(MN)`
-
 ### Implementation
+
+Time: `O(MN)`, Space: `O(MN)`
 
 ```kotlin
 class Solution {
@@ -34,6 +34,33 @@ class Solution {
         }
 
         return dp[m - 1][n - 1]
+    }
+}
+```
+
+Time: `O(MN)`, Space: `O(N)`
+
+```kotlin
+class Solution {
+    fun uniquePathsWithObstacles(obstacleGrid: Array<IntArray>): Int {
+        val (m, n) = obstacleGrid.size to obstacleGrid[0].size
+        val dp = IntArray(n)
+
+        for (i in 0 until m) {
+            for (j in 0 until n) {
+                dp[j] = when {
+                    obstacleGrid[i][j] == 1 -> 0
+                    i + j == 0 -> 1
+                    else -> {
+                        val top = if (i != 0) dp[j] else 0
+                        val left = if (j != 0) dp[j-1] else 0
+                        top + left
+                    }
+                }
+            }
+        }
+
+        return dp[n-1]
     }
 }
 ```
