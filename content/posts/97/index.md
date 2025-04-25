@@ -11,7 +11,6 @@ tags: [String, Dynamic Programming]
 - 設定好之後，計算 dp 就跟走迷宮一樣，每一個座標我們可以看，如果以下任一條件成立 dp 就會是 true：
   - 往上一格也是 true，而且 s3[i+j] == s1[i]
   - 往左一格也是 true，而且 s3[i+j] == s2[j]
-- Time: O(N^2), Space: O(N^2)
 
 ### Example
 
@@ -28,7 +27,9 @@ c x x o o o x
 a x x x x o o
 ```
 
-### Code
+### Implementation
+
+- Time: O(N^2), Space: O(N^2)
 
 ```kotlin
 class Solution {
@@ -52,6 +53,36 @@ class Solution {
         }
 
         return dp[n1][n2]
+    }
+}
+```
+
+### Implementation 2
+
+- Time: O(N^2), Space: O(N)
+
+```kotlin
+class Solution {
+    fun isInterleave(s1: String, s2: String, s3: String): Boolean {
+        val n1 = s1.length
+        val n2 = s2.length
+        if (n1 + n2 != s3.length) return false
+
+        val dp = BooleanArray(n2 + 1)
+        fun getDp(i: Int, j: Int) = if (i < 0 || j < 0) false else dp[j]
+
+        for (i in 0..n1) {
+            for (j in 0..n2) {
+                if (i + j == 0) dp[j] = true
+                else {
+                    val isTopInterleave = getDp(i - 1, j) && s1[i - 1] == s3[i + j - 1]
+                    val isLeftInterleave = getDp(i, j - 1) && s2[j - 1] == s3[i + j - 1]
+                    dp[j] = isTopInterleave || isLeftInterleave
+                }
+            }
+        }
+
+        return dp[n2]
     }
 }
 ```
